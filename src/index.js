@@ -97,7 +97,10 @@ class Game extends React.Component {
     });
 
     let status;
-    if (winner) {
+    if(winner === "Draw"){
+        status = winner;
+    }
+    else if (winner) {
       status = 'Winner: ' + winner;
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
@@ -144,5 +147,16 @@ function calculateWinner(squares) {
       return squares[a];
     }
   }
+    //if we get here either there's more moves to be made or it's a draw
+      //if it's a draw then all the squares will be non-null
+    var draw = true;
+    for(let j = 0; j < squares.length; j++){
+        if(squares[j] == null){
+            draw = false;
+        }
+    }
+    if(draw){
+        return "Draw";
+    }
   return null;
 }
